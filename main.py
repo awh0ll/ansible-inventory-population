@@ -5,10 +5,13 @@ f = open('test.tfstate')
 
 data = json.load(f)
 
+#ansible hosts
+hosts = []
+
 for i in data['resources']:
     if i['type'] == "aws_instance":
         for j in i['instances']:
-            print(j['attributes']['private_dns'])
+            hosts.append(j['attributes']['private_dns'])
     # for j in i['instances']:
     #     if "tags" in j['attributes']:
     #         print(j['attributes']['tags'])
@@ -16,6 +19,6 @@ for i in data['resources']:
     #     #     print("yaaa")
     #     # print(i['name'])
 
-#print(data)
+print(hosts[0])
 
 f.close()
