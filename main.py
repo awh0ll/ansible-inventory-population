@@ -1,5 +1,14 @@
 import json
 
+def output_hosts(hostList):
+    hostFile = open("hosts", "w")
+
+    for i in hostList:
+        hostFile.write(i + "\n")
+
+    #close handle
+    hostFile.close()
+
 #Open yer file
 f = open('test.tfstate')
 
@@ -19,6 +28,7 @@ for i in data['resources']:
     #     #     print("yaaa")
     #     # print(i['name'])
 
-print(hosts[0])
+output_hosts(hosts)
 
+#close handle
 f.close()
