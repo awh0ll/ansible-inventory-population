@@ -1,5 +1,10 @@
 import json
 
+class Host:
+    def ___init___(self, hostName, certPath = None):
+        self.name = hostName
+        self.cert = certPath
+
 #Take in a list of hosts, output it to a file name "hosts" in the execution directory.
 def output_hosts(hostList):
     hostFile = open("hosts", "w")
