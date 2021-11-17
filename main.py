@@ -1,7 +1,7 @@
 import json
 
 class Host:
-    def ___init___(self, hostName, certPath = None):
+    def __init__(self, hostName, certPath = None):
         self.name = hostName
         self.cert = certPath
 
@@ -10,7 +10,11 @@ def output_hosts(hostList):
     hostFile = open("hosts", "w")
 
     for i in hostList:
-        hostFile.write(i + "\n")
+        temp = [i.name]
+        if i.cert is not None:
+            temp.append("ansible_ssh_private_key_file=" + i.cert)
+        
+        hostFile.write(" ".join(temp) + "\n")
 
     hostFile.close()
 
@@ -26,8 +30,9 @@ for i in data['resources']:
     #We only care about AWS instances
     if i['type'] == "aws_instance":
         for j in i['instances']:
-            hosts.append(j['attributes']['private_dns'])
+            hosts.append(Host(j['attributes']['private_dns']))
 
 output_hosts(hosts)
+print(hosts)
 
 stateFile.close()
