@@ -26,7 +26,6 @@ hosts = []
 
 #Iterate through the resources in tfstate
 for i in data['resources']:
-
     #We only care about AWS instances
     if i['type'] == "aws_instance":
         for j in i['instances']:
